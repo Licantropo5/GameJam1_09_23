@@ -19,7 +19,7 @@ namespace GameJam {
 
 		protected abstract void Attack();
 
-		protected abstract void Dead();
+		public abstract void Dead();
 		public void SetNewCheckPoint(Vector2 nextPath) {
 			checkPoint = nextPath;
 		}

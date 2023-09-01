@@ -24,7 +24,9 @@ namespace GameJam {
 			//this is where the attack start
 		}
 
-		protected override void Dead() {
+		public override void Dead() {
+			Debug.Log("Death");
+			//add some coin to the currency won this round, then delete this monster.
 			//Death system, i'll do a controller for this part
 		}
 
