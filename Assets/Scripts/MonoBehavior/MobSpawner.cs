@@ -12,7 +12,7 @@ namespace GameJam {
 
 		private IEnumerator Start() {
 			yield return new WaitForSeconds(0.5f);
-			var mob = Instantiate(mobs[0], spawnLocation.position, Quaternion.identity);
+			Mob mob = Instantiate(mobs[0], spawnLocation.position, Quaternion.identity);
 			NewMobSpawned?.Invoke(mob);
 		}
 
