@@ -8,8 +8,8 @@ public static class Extension {
 				var temp = paths[i];
 				foreach (Path path in paths) {
 					if (path.GetPriority() == i) {
-						paths[i] = path;
 						paths[paths.IndexOf(path)] = temp;
+						paths[i] = path;
 						break;
 					}
 				}

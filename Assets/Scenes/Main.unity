@@ -776,6 +776,7 @@ MonoBehaviour:
   mobs:
   - {fileID: 4823875657702706147, guid: dc78033295f28f74ab0335b2b1816ddf, type: 3}
   spawnLocation: {fileID: 156636306}
+  timeNextSpawn: 1
 --- !u!1 &1350793147
 GameObject:
   m_ObjectHideFlags: 0

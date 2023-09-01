@@ -8,8 +8,12 @@ namespace GameJam {
 		public int damage;
 		public float speed;
 		public Vector2 checkPoint;
-		public bool canMove;
+		protected bool canMove = true;
 		public event Action<Mob> Death;
+
+		public void SetCanMove(bool canMove) {
+			this.canMove = canMove;
+		}
 
 		protected abstract void Move();
 
