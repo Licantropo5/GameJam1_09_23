@@ -1,21 +1,20 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameJam.UI;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace GameJam.Buildings {
 
-	public class Defence : Building{
+	public class FinalTower : Building {
 		private RoundManager roundManger;
 		private CircleCollider2D circleCollider;
 		private List<Mob> inRadiusMob;
 		public float fireRate;
-		[FormerlySerializedAs("ui")] [SerializeField] private UpgradeUIDefence uiDefence;
+		[SerializeField] private UpgradeUIFinalTower uiFInalTower;
 
 		private float time;
 
 		#region NativeEvents
-		
+
 		private void Start() {
 			roundManger = FindObjectOfType<RoundManager>();
 			inRadiusMob = new List<Mob>();
@@ -26,7 +25,7 @@ namespace GameJam.Buildings {
 		private void FixedUpdate() {
 			time += Time.deltaTime;
 		}
-		
+
 		#endregion
 
 		#region Attack
@@ -44,7 +43,7 @@ namespace GameJam.Buildings {
 		}
 
 		#endregion
-		
+
 		#region Trigger
 
 		private void OnTriggerEnter2D(Collider2D other) {
@@ -72,10 +71,10 @@ namespace GameJam.Buildings {
 
 		public void OnMouseDown() {
 			if (roundManger.GetCurrentPhase() == Phase.Upgrade) {
-				uiDefence.SetShowUpgrade(true);
+				uiFInalTower.SetShowUpgrade(true);
 			}
 		}
-		
+
 		private bool IsFireRateMaxedOut() {
 			return fireRate <= 1;
 		}
@@ -89,12 +88,11 @@ namespace GameJam.Buildings {
 
 		public void UpgradeDamage() {
 			Debug.Log("Upgrade Damage");
-			damage += 4;
+			damage += 2;
 		}
 
 		#endregion
-		//Create a coroutine system with a fireRate to damage the mobs
-		
+
 	}
 
 }
