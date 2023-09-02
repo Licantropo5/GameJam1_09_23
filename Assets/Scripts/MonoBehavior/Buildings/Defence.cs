@@ -1,35 +1,34 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
+using GameJam.UI;
 
 namespace GameJam.Buildings {
 
-	public class Defence : Building {
-
+	public class Defence : Building{
+		private RoundManager roundManger;
 		private CircleCollider2D circleCollider;
 		private List<Mob> inRadiusMob;
 		public float fireRate;
+		[SerializeField] private UpgradeUI ui;
 
 		private float time;
 
+		#region NativeEvents
+		
 		private void Start() {
+			roundManger = FindObjectOfType<RoundManager>();
 			inRadiusMob = new List<Mob>();
 			circleCollider = GetComponent<CircleCollider2D>();
 			circleCollider.radius = range;
 		}
 
-		// private void FixedUpdate() {
-		// 	if (inRadiusMob.Count > 0) {
-		// 		Attack(inRadiusMob[0]);
-		// 		while (expression) {
-		// 			
-		// 		}
-		// 	}
-		// }
 		private void FixedUpdate() {
 			time += Time.deltaTime;
 		}
+		
+		#endregion
+
+		#region Attack
 
 		private void Attack() {
 			if (time >= fireRate && inRadiusMob.Count > 0) {
@@ -42,6 +41,10 @@ namespace GameJam.Buildings {
 				time = 0;
 			}
 		}
+
+		#endregion
+		
+		#region Trigger
 
 		private void OnTriggerEnter2D(Collider2D other) {
 			Debug.Log("EnterMOB");
@@ -62,7 +65,35 @@ namespace GameJam.Buildings {
 			}
 		}
 
+		#endregion
+
+		#region Upgrade
+
+		public void OnMouseDown() {
+			if (roundManger.GetCurrentPhase() == Phase.Upgrade) {
+				ui.SetShowUpgrade(true);
+			}
+		}
+		
+		private bool IsFireRateMaxedOut() {
+			return fireRate <= 1;
+		}
+
+		public void UpgradeFireRate() {
+			if (!IsFireRateMaxedOut()) {
+				fireRate -= 0.1f;
+				Debug.Log("FireRate++");
+			}
+		}
+
+		public void UpgradeDamage() {
+			Debug.Log("Upgrade Damage");
+			damage += 4;
+		}
+
+		#endregion
 		//Create a coroutine system with a fireRate to damage the mobs
+		
 	}
 
 }

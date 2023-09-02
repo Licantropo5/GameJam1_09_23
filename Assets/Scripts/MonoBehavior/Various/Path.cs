@@ -12,10 +12,10 @@ namespace GameJam {
 
 		private void Start() {
 			position = transform.position;
-			FinalCheckPoint += Test;
+			FinalCheckPoint += StartAttack;
 		}
 
-		private void Test(Mob mob) {
+		private void StartAttack(Mob mob) {
 			Debug.Log("StartAttack");
 		}
 
