@@ -1,5 +1,4 @@
 ﻿using GameJam.Buildings;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace GameJam {
@@ -7,7 +6,8 @@ namespace GameJam {
 	public class BaseToPlaceDefences : MonoBehaviour {
 		[SerializeField] private Defence defence;
 		private void OnMouseDown() {
-			Instantiate(defence, transform.position, quaternion.identity);
+			var def = Instantiate(defence, transform.position, Quaternion.identity);
+			def.transform.position += Vector3.back;
 		}
 	}
 

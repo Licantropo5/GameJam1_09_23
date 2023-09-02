@@ -19,7 +19,9 @@ namespace GameJam {
 
 		protected abstract void Attack();
 
-		public abstract void Dead();
+		public virtual void Dead() {
+			Death?.Invoke(this);
+		}
 		public void SetNewCheckPoint(Vector2 nextPath) {
 			checkPoint = nextPath;
 		}
