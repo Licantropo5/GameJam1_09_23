@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using GameJam.UI;
 using UnityEngine;
 
 namespace GameJam {
@@ -13,6 +14,7 @@ namespace GameJam {
 		[SerializeField] private Phase currentPhase;
 		[SerializeField] private int upgradePhaseDuration;
 		[SerializeField] private MobSpawner spawner;
+		private RoundManagerUI ui;
 		private int survivedRounds;
 
 		private Coroutine coroutineDefence;
@@ -24,6 +26,9 @@ namespace GameJam {
 		public static event Action DefencePhaseEnd;
 
 		private void Start() {
+			ui = GetComponentInChildren<RoundManagerUI>();
+			UpgradePhaseStart += ui.ShowPhase;
+			DefencePhaseStart += ui.ShowPhase;
 			UpgradePhaseEnd += StartDefence;
 			DefencePhaseEnd += StartUpgrade;
 			DefencePhaseEnd += AddSurvivedRound;
