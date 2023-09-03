@@ -764,6 +764,7 @@ MonoBehaviour:
   health: 0
   damage: 1
   range: 4
+  bullet: {fileID: 8406132451352190129, guid: 7ee657841ae88264ba6513434c85acd6, type: 3}
   fireRate: 2
   uiDefence: {fileID: 5111985509065118828}
 --- !u!58 &6950179346930327465

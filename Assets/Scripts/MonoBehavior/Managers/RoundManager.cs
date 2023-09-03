@@ -37,7 +37,13 @@ namespace GameJam {
 			StartUpgrade();
 		}
 
-		
+		private float internalTime;
+
+		private void FixedUpdate() {
+			if (Time.timeScale != 0) {
+				internalTime += Time.fixedDeltaTime;
+			}
+		}
 
 		private void StartDefence() {
 			coroutineDefence = StartCoroutine(StartDefencePhase());
@@ -60,7 +66,7 @@ namespace GameJam {
 			//Do things for upgrading with the upgrading manager
 			ChangeCurrentPhase(Phase.Upgrade);
 			UpgradePhaseStart?.Invoke();
-			yield return new WaitForSeconds(upgradePhaseDuration);
+			yield return new WaitUntil(() => internalTime > upgradePhaseDuration);
 			UpgradePhaseEnd?.Invoke();
 		}
 
@@ -81,6 +87,7 @@ namespace GameJam {
 			ChangeCurrentPhase(Phase.Defence);
 			DefencePhaseStart?.Invoke();
 			yield return new WaitUntil(() => spawner.AllMonstersKilled());
+			internalTime = 0;
 			DefencePhaseEnd?.Invoke();
 		}
 

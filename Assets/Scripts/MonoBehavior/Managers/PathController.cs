@@ -14,9 +14,6 @@ namespace GameJam {
 				path.HasReachedPath += GiveNextPathToMob;
 			}
 			paths = paths.OrderByPriority();
-			foreach (Path path in paths) {
-				Debug.Log($"priority : {path.GetPriority()} and index : {paths.IndexOf(path)}");
-			}
 			MobSpawner.NewMobSpawned += GetFirstPath;
 		}
 

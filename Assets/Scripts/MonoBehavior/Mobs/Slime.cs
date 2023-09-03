@@ -14,6 +14,7 @@ namespace GameJam {
 		private float time;
 
 		private void FixedUpdate() {
+			SetCanMove(Time.timeScale == 1);
 			if (canMove) {
 				Move();
 			}

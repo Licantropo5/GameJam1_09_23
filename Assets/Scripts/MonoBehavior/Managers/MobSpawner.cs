@@ -16,11 +16,10 @@ namespace GameJam {
 		private List<Mob> spawnedMonsters;
 		public static event Action<Mob> NewMobSpawned; 
 
-		private IEnumerator Start() {
+		private void Start() {
 			roundManager = FindObjectOfType<RoundManager>();
 			RoundManager.DefencePhaseStart += CallSpawn;
 			spawnedMonsters = new List<Mob>();
-			yield return new WaitForSeconds(0.5f);
 		}
 
 		public bool AllMonstersKilled() {
@@ -32,19 +31,21 @@ namespace GameJam {
 		}
 
 		private IEnumerator Spawn(int numMobToSpawn) {
-			for (int i = 0; i < numMobToSpawn; i++) {
-				int rng = Random.Range(0, mobs.Count);
-				Mob mob = Instantiate(mobs[rng], spawnLocation.position, Quaternion.identity);
-				NewMobSpawned?.Invoke(mob);
-				mob.Death += RemoveMob;
-				mob.health += Random.Range(0, roundManager.GetSurvivedRounds());
-				mob.speed += Random.Range(0, 2);
-				mob.damage += Random.Range(0, roundManager.GetSurvivedRounds());
-				spawnedMonsters.Add(mob);
-				yield return new WaitForSeconds(timeNextSpawn);
+			if (Time.timeScale != 0) {
+				for (int i = 0; i < numMobToSpawn; i++) {
+					int rng = Random.Range(0, mobs.Count);
+					Mob mob = Instantiate(mobs[rng], spawnLocation.position, Quaternion.identity);
+					NewMobSpawned?.Invoke(mob);
+					mob.Death += RemoveMob;
+					mob.health += Random.Range(0, roundManager.GetSurvivedRounds());
+					mob.speed += Random.Range(0, 2);
+					mob.damage += Random.Range(0, roundManager.GetSurvivedRounds());
+					spawnedMonsters.Add(mob);
+					yield return new WaitForSeconds(timeNextSpawn);
+				}
+				AddMoreMonsters();
+				StopAllCoroutines();
 			}
-			AddMoreMonsters();
-			StopAllCoroutines();
 		}
 		private void RemoveMob(Mob mob) {
 			spawnedMonsters.Remove(mob);
