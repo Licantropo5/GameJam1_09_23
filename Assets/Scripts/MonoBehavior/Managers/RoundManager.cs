@@ -38,6 +38,18 @@ namespace GameJam {
 			StartUpgrade();
 		}
 
+		private void OnGameEnd() {
+			UpgradePhaseStart -= ui.ShowPhase;
+			DefencePhaseStart -= ui.ShowPhase;
+			UpgradePhaseEnd -= StartDefence;
+			DefencePhaseEnd -= StartUpgrade;
+			DefencePhaseEnd -= AddSurvivedRound;
+			DefencePhaseEnd -= Wallet.GetGoldFromRound;
+			DefencePhaseEnd -= Wallet.ResetGoldNewRound;
+			coroutineUpgrade = null;
+			coroutineDefence = null;
+		}
+
 		private float internalTime;
 
 		private void FixedUpdate() {
@@ -47,11 +59,11 @@ namespace GameJam {
 		}
 
 		private void StartDefence() {
-			coroutineDefence = StartCoroutine(StartDefencePhase());
+			coroutineDefence ??= StartCoroutine(StartDefencePhase());
 		}
 
 		private void StartUpgrade() {
-			coroutineUpgrade = StartCoroutine(StartUpgradePhase());
+			coroutineUpgrade ??= StartCoroutine(StartUpgradePhase());
 		}
 
 		private void ChangeCurrentPhase(Phase newPhase) {
@@ -79,6 +91,7 @@ namespace GameJam {
 
 		public void EndGame() {
 			StopAllCoroutines();
+			OnGameEnd();
 			Time.timeScale = 0;
 			endGameCanvas.gameObject.SetActive(true);
 			endGameCanvas.SetUpEndGameCanvas();

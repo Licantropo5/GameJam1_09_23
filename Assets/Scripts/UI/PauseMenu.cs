@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GameJam.UI {
@@ -10,8 +9,7 @@ namespace GameJam.UI {
 		private bool isActive = false;
 		private bool areRulesShown = false;
 
-		private IEnumerator Start() {
-			yield return null;
+		private void Start() {
 			canvas.gameObject.SetActive(false);
 		}
 

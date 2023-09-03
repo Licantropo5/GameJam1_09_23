@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bccf71ee8431fa2c9fbd0b58b25d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endGameCanvas: {fileID: 8297492883054989250, guid: e7f14254adf9b9441bd0cd99fd38a045, type: 3}
   currentPhase: 0
   upgradePhaseDuration: 5
   spawner: {fileID: 6260147444213477869}
@@ -565,7 +566,7 @@ Transform:
   - {fileID: 1374258630148164216}
   - {fileID: 7355223559395330860}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6678394499704239473
 GameObject:

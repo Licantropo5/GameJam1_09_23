@@ -18,11 +18,12 @@ namespace GameJam.UI {
 		}
 
 		public void SetUpEndGameCanvas() {
+			canvas.gameObject.SetActive(true);
 			EndGameText();
 		}
 
 		private void ToMainMenu() {
-			SceneManager.LoadScene(1);
+			SceneManager.LoadScene(0);
 		}
 
 		private void EndGameText() {

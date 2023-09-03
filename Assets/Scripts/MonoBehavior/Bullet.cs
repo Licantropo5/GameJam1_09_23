@@ -20,7 +20,7 @@ namespace GameJam {
 			float time = 0;
 			if (target != null) {
 				while (time < timeToHit && target != null) {
-					transform.LookAt(transform, target.transform.position);
+					transform.LookAt(transform.position, target.transform.position);
 					Vector3 distance = target.transform.position - transform.position;
 					transform.Translate(distance * (time * speed), Space.Self);
 					time += Time.fixedDeltaTime;
