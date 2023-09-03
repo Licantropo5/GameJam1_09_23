@@ -36,6 +36,8 @@ namespace GameJam {
 			//this is where the attack start
 			StopAllCoroutines();
 			target.health -= damage;
+			float normalized = (float)target.health / (float)target.maxHealth;
+			target.healthBar.SetSize(normalized);
 			if (target.health <= 0) {
 				target.Dead();
 			}

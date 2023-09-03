@@ -29,10 +29,10 @@ namespace GameJam.UI {
 		}
 
 		private void ShowNextUpgradePriceDamage() {
-			nextUpgradeTextDamage.text = $"{defence.GetUpgradeDamagePrice()}";
+			nextUpgradeTextDamage.text = $"Next price: {defence.GetUpgradeDamagePrice()}";
 		}
 		private void ShowNextUpgradePriceFireRate() {
-			nextUpgradeTextFireRate.text = $"{defence.GetUpgradeFireRatePrice()}";
+			nextUpgradeTextFireRate.text = $"Next price: {defence.GetUpgradeFireRatePrice()}";
 		}
 
 		private void ShowDamage() {
@@ -49,6 +49,12 @@ namespace GameJam.UI {
 
 		public void SetShowUpgrade(bool set) {
 			canvas.gameObject.SetActive(set);
+			if (set) {
+				ShowNextUpgradePriceDamage();
+				ShowNextUpgradePriceFireRate();
+				ShowDamage();
+				ShowFireRate();
+			}
 		}
 	}
 

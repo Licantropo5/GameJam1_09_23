@@ -5,6 +5,8 @@ using UnityEngine;
 namespace GameJam.Buildings {
 
 	public class FinalTower : Building {
+		public HealthBar healthBar;
+		public int maxHealth;
 		[SerializeField] private Bullet bullet;
 		private RoundManager roundManger;
 		private CircleCollider2D circleCollider;
@@ -20,6 +22,7 @@ namespace GameJam.Buildings {
 		#region NativeEvents
 
 		private void Start() {
+			maxHealth = health;
 			roundManger = FindObjectOfType<RoundManager>();
 			inRadiusMob = new List<Mob>();
 			circleCollider = GetComponent<CircleCollider2D>();
@@ -37,12 +40,17 @@ namespace GameJam.Buildings {
 		private void Attack() {
 			if (time >= fireRate && inRadiusMob.Count > 0) {
 				Mob mob = inRadiusMob[0];
-				Bullet instantiate = Instantiate(bullet, transform.position, Quaternion.identity);
-				instantiate.TrowAtMob(mob);
 				mob.health -= damage;
-				if (mob.health <= 0) {
-					mob.Dead();
-					inRadiusMob.Remove(mob);
+				switch (mob.health) {
+					case > 0: {
+						Bullet instantiate = Instantiate(bullet, transform.position, Quaternion.identity);
+						instantiate.TrowAtMob(mob);
+						break;
+					}
+					case <= 0:
+						mob.Dead();
+						inRadiusMob.Remove(mob);
+						break;
 				}
 				time = 0;
 			}
