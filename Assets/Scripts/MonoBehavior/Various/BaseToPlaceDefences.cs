@@ -27,7 +27,7 @@ namespace GameJam {
 
 		private IEnumerator ShowErrorText() {
 			text.text = "Only in Upgrade phase";
-			text.color = Color.red;
+			text.color = Color.white;
 			yield return new WaitForSeconds(2f);
 			text.text = "";
 		}
