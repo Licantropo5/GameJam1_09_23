@@ -1,8 +1,8 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Credits : MonoBehaviour {
-    [SerializeField] private TMP_Text text;
+    [SerializeField] private Image text;
     private bool show = true;
 
     public void ShowCredits() {
