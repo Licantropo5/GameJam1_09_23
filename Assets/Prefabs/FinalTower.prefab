@@ -532,8 +532,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 720
-  damage: 0
+  damage: 7
   range: 5
+  bullet: {fileID: 8406132451352190129, guid: 8b31b178d0410f544bf59d9d82eb244c, type: 3}
   fireRate: 3
   uiFinalTower: {fileID: 362652246370308567}
 --- !u!212 &2528241500339425606
@@ -795,6 +796,8 @@ MonoBehaviour:
   btnCloseUI: {fileID: 8672615125428372575}
   damageText: {fileID: 2426989738758605495}
   fireRateText: {fileID: 4620238280121667102}
+  nextUpgradeTextDamage: {fileID: 0}
+  nextUpgradeTextFireRate: {fileID: 0}
   finalTower: {fileID: 5631377465440772055}
 --- !u!1 &8442945481640307726
 GameObject:

@@ -39,7 +39,7 @@ namespace GameJam.Buildings {
 			//trow something to the monster.
 			if (time >= fireRate && inRadiusMob.Count > 0) {
 				Mob mob = inRadiusMob[0];
-				Bullet instantiate = Instantiate(bullet, transform.position, quaternion.identity);
+				Bullet instantiate = Instantiate(bullet, transform.position, Quaternion.identity);
 				instantiate.TrowAtMob(mob);
 				mob.health -= damage;
 				if (mob.health <= 0) {

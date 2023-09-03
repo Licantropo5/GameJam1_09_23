@@ -5,6 +5,7 @@ using UnityEngine;
 namespace GameJam.Buildings {
 
 	public class FinalTower : Building {
+		[SerializeField] private Bullet bullet;
 		private RoundManager roundManger;
 		private CircleCollider2D circleCollider;
 		private List<Mob> inRadiusMob;
@@ -36,6 +37,8 @@ namespace GameJam.Buildings {
 		private void Attack() {
 			if (time >= fireRate && inRadiusMob.Count > 0) {
 				Mob mob = inRadiusMob[0];
+				Bullet instantiate = Instantiate(bullet, transform.position, Quaternion.identity);
+				instantiate.TrowAtMob(mob);
 				mob.health -= damage;
 				if (mob.health <= 0) {
 					mob.Dead();
