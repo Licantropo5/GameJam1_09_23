@@ -11,6 +11,7 @@ namespace GameJam {
 	}
 
 	public class RoundManager : MonoBehaviour {
+		[SerializeField] private EndGameCanvas endGameCanvas;
 		[SerializeField] private Phase currentPhase;
 		[SerializeField] private int upgradePhaseDuration;
 		[SerializeField] private MobSpawner spawner;
@@ -78,7 +79,9 @@ namespace GameJam {
 
 		public void EndGame() {
 			StopAllCoroutines();
-			Debug.Log("End Game");
+			Time.timeScale = 0;
+			endGameCanvas.gameObject.SetActive(true);
+			endGameCanvas.SetUpEndGameCanvas();
 		}
 
 		private IEnumerator StartDefencePhase() {

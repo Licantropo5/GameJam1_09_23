@@ -11,7 +11,7 @@ namespace GameJam.UI {
 		private bool areRulesShown = false;
 
 		private IEnumerator Start() {
-			yield return new WaitForSeconds(0.2f);
+			yield return null;
 			canvas.gameObject.SetActive(false);
 		}
 
