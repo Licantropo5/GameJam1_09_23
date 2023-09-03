@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace GameJam {
@@ -39,7 +38,7 @@ namespace GameJam {
 				NewMobSpawned?.Invoke(mob);
 				mob.Death += RemoveMob;
 				mob.health += Random.Range(0, roundManager.GetSurvivedRounds());
-				mob.speed += Random.Range(0, 3);
+				mob.speed += Random.Range(0, 2);
 				mob.damage += Random.Range(0, roundManager.GetSurvivedRounds());
 				spawnedMonsters.Add(mob);
 				yield return new WaitForSeconds(timeNextSpawn);
@@ -54,9 +53,6 @@ namespace GameJam {
 		private void AddMoreMonsters() {
 			numMob += 2;
 		}
-		
-		//Round Manager Pass data based of the round
-		
 	}
 
 }
