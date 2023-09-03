@@ -52,6 +52,7 @@ namespace GameJam {
 		public override void Dead() {
 			base.Dead();
 			Debug.Log("Death");
+			Wallet.AddGoldToRound(goldOnDeath);
 			Destroy(gameObject);
 			//add some coin to the currency won this round, then delete this monster.
 			//Death system, i'll do a controller for this part

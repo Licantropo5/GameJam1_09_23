@@ -12,6 +12,8 @@ namespace GameJam.UI {
 		[SerializeField] private Button btnCloseUI;
 		[SerializeField] private TMP_Text damageText;
 		[SerializeField] private TMP_Text fireRateText;
+		[SerializeField] private TMP_Text nextUpgradeTextDamage;
+		[SerializeField] private TMP_Text nextUpgradeTextFireRate;
 		[SerializeField] private FinalTower finalTower;
 
 
@@ -20,10 +22,17 @@ namespace GameJam.UI {
 			btnUpgradeDamage.onClick.AddListener(ShowDamage);
 			btnUpgradeFireRate.onClick.AddListener(finalTower.UpgradeFireRate);
 			btnUpgradeFireRate.onClick.AddListener(ShowFireRate);
+			
 			btnCloseUI.onClick.AddListener(CloseMenu);
 			CloseMenu();
 		}
 
+		private void ShowNextUpgradePriceDamage() {
+			nextUpgradeTextDamage.text = $"{finalTower.GetUpgradeDamagePrice()}";
+		}
+		private void ShowNextUpgradePriceFireRate() {
+			nextUpgradeTextFireRate.text = $"{finalTower.GetUpgradeFireRatePrice()}";
+		}
 		private void ShowDamage() {
 			damageText.text = $"Damage\n {finalTower.damage}";
 		}

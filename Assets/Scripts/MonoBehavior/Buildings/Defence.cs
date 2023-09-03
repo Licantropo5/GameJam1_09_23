@@ -5,17 +5,21 @@ using UnityEngine.Serialization;
 
 namespace GameJam.Buildings {
 
-	public class Defence : Building{
+	public class Defence : Building {
 		private RoundManager roundManger;
 		private CircleCollider2D circleCollider;
 		private List<Mob> inRadiusMob;
 		public float fireRate;
-		[FormerlySerializedAs("ui")] [SerializeField] private UpgradeUIDefence uiDefence;
+		[FormerlySerializedAs("ui")] [SerializeField]
+		private UpgradeUIDefence uiDefence;
 
 		private float time;
 
+		private int upgradeDamage = 4;
+		private int upgradeFireRate = 3;
+
 		#region NativeEvents
-		
+
 		private void Start() {
 			roundManger = FindObjectOfType<RoundManager>();
 			inRadiusMob = new List<Mob>();
@@ -26,7 +30,7 @@ namespace GameJam.Buildings {
 		private void FixedUpdate() {
 			time += Time.deltaTime;
 		}
-		
+
 		#endregion
 
 		#region Attack
@@ -44,7 +48,7 @@ namespace GameJam.Buildings {
 		}
 
 		#endregion
-		
+
 		#region Trigger
 
 		private void OnTriggerEnter2D(Collider2D other) {
@@ -75,26 +79,41 @@ namespace GameJam.Buildings {
 				uiDefence.SetShowUpgrade(true);
 			}
 		}
-		
+
 		private bool IsFireRateMaxedOut() {
 			return fireRate <= 1;
 		}
 
 		public void UpgradeFireRate() {
-			if (!IsFireRateMaxedOut()) {
+			if (!IsFireRateMaxedOut() && Wallet.HaveEnoughMoney(upgradeFireRate)) {
 				fireRate -= 0.1f;
+				Wallet.Upgrade(upgradeFireRate);
 				Debug.Log("FireRate++");
+				upgradeFireRate += 3 * roundManger.GetSurvivedRounds();
 			}
 		}
 
+		public int GetUpgradeDamagePrice() {
+			return upgradeDamage;
+		}
+
+		public int GetUpgradeFireRatePrice() {
+			return upgradeFireRate;
+		}
+
 		public void UpgradeDamage() {
-			Debug.Log("Upgrade Damage");
-			damage += 4;
+			if (Wallet.HaveEnoughMoney(upgradeDamage)) {
+				Debug.Log("Upgrade Damage");
+				damage += 4;
+				Wallet.Upgrade(upgradeDamage);
+				upgradeDamage += 4 * roundManger.GetSurvivedRounds();
+			}
 		}
 
 		#endregion
+
 		//Create a coroutine system with a fireRate to damage the mobs
-		
+
 	}
 
 }

@@ -9,6 +9,7 @@ namespace GameJam {
 		public float speed;
 		public float fireRate;
 		public Vector2 checkPoint;
+		public int goldOnDeath;
 		protected bool canMove = true;
 		public event Action<Mob> Death;
 

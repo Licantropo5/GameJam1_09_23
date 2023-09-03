@@ -11,12 +11,14 @@ namespace GameJam {
 		[SerializeField] private List<Mob> mobs;
 		[SerializeField] private Transform spawnLocation;
 		[SerializeField] private float timeNextSpawn;
+		private RoundManager roundManager;
 
 		public int numMob;
 		private List<Mob> spawnedMonsters;
 		public static event Action<Mob> NewMobSpawned; 
 
 		private IEnumerator Start() {
+			roundManager = FindObjectOfType<RoundManager>();
 			RoundManager.DefencePhaseStart += CallSpawn;
 			spawnedMonsters = new List<Mob>();
 			yield return new WaitForSeconds(0.5f);
@@ -36,6 +38,9 @@ namespace GameJam {
 				Mob mob = Instantiate(mobs[rng], spawnLocation.position, Quaternion.identity);
 				NewMobSpawned?.Invoke(mob);
 				mob.Death += RemoveMob;
+				mob.health += Random.Range(0, roundManager.GetSurvivedRounds());
+				mob.speed += Random.Range(0, 3);
+				mob.damage += Random.Range(0, roundManager.GetSurvivedRounds());
 				spawnedMonsters.Add(mob);
 				yield return new WaitForSeconds(timeNextSpawn);
 			}

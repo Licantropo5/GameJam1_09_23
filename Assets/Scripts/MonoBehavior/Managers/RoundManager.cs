@@ -27,6 +27,8 @@ namespace GameJam {
 			UpgradePhaseEnd += StartDefence;
 			DefencePhaseEnd += StartUpgrade;
 			DefencePhaseEnd += AddSurvivedRound;
+			DefencePhaseEnd += Wallet.GetGoldFromRound;
+			DefencePhaseEnd += Wallet.ResetGoldNewRound;
 			StartUpgrade();
 		}
 

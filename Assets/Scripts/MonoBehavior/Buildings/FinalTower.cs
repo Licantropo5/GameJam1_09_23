@@ -13,6 +13,9 @@ namespace GameJam.Buildings {
 
 		private float time;
 
+		private int upgradeDamage = 4;
+		private int upgradeFireRate = 3;
+		
 		#region NativeEvents
 
 		private void Start() {
@@ -80,21 +83,35 @@ namespace GameJam.Buildings {
 		}
 
 		public void UpgradeFireRate() {
-			if (!IsFireRateMaxedOut()) {
+			if (!IsFireRateMaxedOut() && Wallet.HaveEnoughMoney(upgradeFireRate)) {
 				fireRate -= 0.1f;
+				Wallet.Upgrade(upgradeFireRate);
 				Debug.Log("FireRate++");
+				upgradeFireRate += 3 * roundManger.GetSurvivedRounds();
 			}
 		}
 
 		public void UpgradeDamage() {
-			Debug.Log("Upgrade Damage");
-			damage += 2;
+			if (Wallet.HaveEnoughMoney(upgradeDamage)) {
+				Debug.Log("Upgrade Damage");
+				damage += 3;
+				Wallet.Upgrade(upgradeDamage);
+				upgradeDamage += 3 * roundManger.GetSurvivedRounds();
+			}
 		}
 
 		#endregion
 
 		public override void Dead() {
 			roundManger.EndGame();
+		}
+		
+		public int GetUpgradeDamagePrice() {
+			return upgradeDamage;
+		}
+
+		public int GetUpgradeFireRatePrice() {
+			return upgradeFireRate;
 		}
 
 	}

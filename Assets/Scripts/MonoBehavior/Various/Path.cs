@@ -16,7 +16,6 @@ namespace GameJam {
 		}
 
 		private void StartAttack(Mob mob) {
-			Debug.Log("StartAttack");
 			mob.Attack();
 		}
 
@@ -29,7 +28,6 @@ namespace GameJam {
 		}
 
 		private void OnTriggerEnter2D(Collider2D other) {
-			Debug.Log($"Enter Path {name}");
 			if (other.gameObject.GetComponent<Mob>() is Mob mob) {
 				HasReachedPath?.Invoke(mob, this);
 			}
