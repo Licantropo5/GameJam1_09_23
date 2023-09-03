@@ -13,19 +13,19 @@ namespace GameJam {
 		}
 
 		private IEnumerator Trow(Mob target) {
-			if (target != default) {
 				float time = 0;
 				while (time < timeToHit) {
-					Vector3 distance = target.transform.position - transform.position;
-					transform.Translate(distance * (time * speed), Space.Self);
-					time += Time.fixedDeltaTime;
-					yield return null;
+					if (target != null) {
+						Vector3 distance = target.transform.position - transform.position;
+						transform.Translate(distance * (time * speed), Space.Self);
+						time += Time.fixedDeltaTime;
+						yield return null;	
+					}
 				}
 				yield return new WaitUntil(() => time >= timeToHit);
 				coroutine = null;
 				Destroy(gameObject);
 			}
-		}
 	}
 
 }
