@@ -7,6 +7,7 @@ namespace GameJam {
 		public int health;
 		public int damage;
 		public float speed;
+		public float fireRate;
 		public Vector2 checkPoint;
 		protected bool canMove = true;
 		public event Action<Mob> Death;
@@ -17,9 +18,11 @@ namespace GameJam {
 
 		protected abstract void Move();
 
-		protected abstract void Attack();
+		public virtual void Attack() {
+			Debug.Log("Virtual");
+		}
 
-		public virtual void Dead() {
+		public override void Dead() {
 			Death?.Invoke(this);
 		}
 		public void SetNewCheckPoint(Vector2 nextPath) {

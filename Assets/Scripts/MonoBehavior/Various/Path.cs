@@ -17,6 +17,7 @@ namespace GameJam {
 
 		private void StartAttack(Mob mob) {
 			Debug.Log("StartAttack");
+			mob.Attack();
 		}
 
 		public int GetPriority() {

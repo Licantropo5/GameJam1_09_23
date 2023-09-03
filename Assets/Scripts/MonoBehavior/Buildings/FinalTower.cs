@@ -9,7 +9,7 @@ namespace GameJam.Buildings {
 		private CircleCollider2D circleCollider;
 		private List<Mob> inRadiusMob;
 		public float fireRate;
-		[SerializeField] private UpgradeUIFinalTower uiFInalTower;
+		[SerializeField] private UpgradeUIFinalTower uiFinalTower;
 
 		private float time;
 
@@ -71,7 +71,7 @@ namespace GameJam.Buildings {
 
 		public void OnMouseDown() {
 			if (roundManger.GetCurrentPhase() == Phase.Upgrade) {
-				uiFInalTower.SetShowUpgrade(true);
+				uiFinalTower.SetShowUpgrade(true);
 			}
 		}
 
@@ -92,6 +92,10 @@ namespace GameJam.Buildings {
 		}
 
 		#endregion
+
+		public override void Dead() {
+			roundManger.EndGame();
+		}
 
 	}
 

@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPhase: 0
-  upgradePhaseDuration: 45
+  upgradePhaseDuration: 1
   spawner: {fileID: 1324015578}
 --- !u!1 &234550465
 GameObject:
@@ -1452,11 +1452,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5631377465440772055, guid: 91dd756444229844882566fb5ade1f0b, type: 3}
       propertyPath: range
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6542538427612673737, guid: 91dd756444229844882566fb5ade1f0b, type: 3}
       propertyPath: m_Name
       value: FinalTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398107027901732140, guid: 91dd756444229844882566fb5ade1f0b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
